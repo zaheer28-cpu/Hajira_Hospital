@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-newsreader), "Newsreader", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: var(--font-plus-jakarta), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+  --color-sandstone-bg: #FAF8F5;
+  --color-sandstone-card: #FFFFFF;
+  --color-sandstone-subtle: #F3EFEA;
+  --color-sandstone-border: #E6E1D7;
+  --color-sandstone-border-light: #ECE8E0;
+
+  --color-forest-dark: #122119;
+  --color-forest-rich: #162E23;
+  --color-forest-primary: #1C382B;
+  --color-forest-hover: #142B21;
+  --color-forest-soft: #2E5241;
+  --color-forest-tint: #E8EFEA;
+
+  --color-ink-primary: #18231E;
+  --color-ink-muted: #53625B;
+  --color-ink-subtle: #798A82;
+
+  --color-sage-tint: #ECEEE9;
+  --color-sage-border: #D8DFD7;
+}
+
+/* Custom smooth utility classes for editorial look */
+.font-editorial {
+  font-family: var(--font-newsreader), Georgia, serif;
+}
+
+.font-body {
+  font-family: var(--font-plus-jakarta), system-ui, sans-serif;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #D5CFC4;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B8B0A2;
+}
+
+/* Editorial Keyframe Animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes shimmerSlow {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Smooth card transition helper */
+.card-hover-lift {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px -10px rgba(24, 35, 30, 0.08), 0 10px 10px -8px rgba(24, 35, 30, 0.04);
+}
