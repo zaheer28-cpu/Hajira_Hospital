@@ -9,8 +9,15 @@ import {
   CheckCircle,
   ChevronRight,
   ChevronLeft,
+  MessageCircle,
+  ExternalLink,
 } from "lucide-react";
-import { DEPARTMENTS, DOCTORS } from "@/data/hospitalData";
+import {
+  DEPARTMENTS,
+  DOCTORS,
+  HOSPITAL_INFO,
+  createWhatsAppAppointmentUrl,
+} from "@/data/hospitalData";
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -26,8 +33,10 @@ export function BookingModal({
   initialDoctorId,
 }: BookingModalProps) {
   const [step, setStep] = useState<number>(1);
-  const [departmentId, setDepartmentId] = useState<string>("general-medicine");
-  const [doctorId, setDoctorId] = useState<string>("any");
+  const [departmentId, setDepartmentId] = useState<string>(
+    initialDepartmentId || "gynaecology"
+  );
+  const [doctorId, setDoctorId] = useState<string>(initialDoctorId || "any");
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("morning");
   const [fullName, setFullName] = useState<string>("");
@@ -35,18 +44,25 @@ export function BookingModal({
   const [email, setEmail] = useState<string>("");
   const [visitNotes, setVisitNotes] = useState<string>("");
   const [bookingRef, setBookingRef] = useState<string>("");
+  const [whatsappUrl, setWhatsappUrl] = useState<string>("");
 
-  useEffect(() => {
+  // Sync state when props change (idiomatic React 19 render-time adjustment)
+  const [prevDeptProp, setPrevDeptProp] = useState(initialDepartmentId);
+  const [prevDoctorProp, setPrevDoctorProp] = useState(initialDoctorId);
+
+  if (initialDepartmentId !== prevDeptProp) {
+    setPrevDeptProp(initialDepartmentId);
     if (initialDepartmentId) {
       setDepartmentId(initialDepartmentId);
     }
+  }
+
+  if (initialDoctorId !== prevDoctorProp) {
+    setPrevDoctorProp(initialDoctorId);
     if (initialDoctorId) {
       setDoctorId(initialDoctorId);
     }
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    setSelectedDate(tomorrow.toISOString().split("T")[0]);
-  }, [initialDepartmentId, initialDoctorId, isOpen]);
+  }
 
   // Close on Escape key
   useEffect(() => {
@@ -70,7 +86,36 @@ export function BookingModal({
   const handleNextStep = () => {
     if (step === 3) {
       const randomCode = Math.floor(1000 + Math.random() * 9000);
-      setBookingRef(`HAJ-2026-${randomCode}`);
+      const newRef = `HAJ-2026-${randomCode}`;
+      setBookingRef(newRef);
+
+      const targetDoctor = DOCTORS.find((doc) => doc.id === doctorId);
+      const effectiveDate =
+        selectedDate ||
+        new Date(Date.now() + 86400000).toISOString().split("T")[0];
+      const waUrl = createWhatsAppAppointmentUrl({
+        fullName: fullName.trim(),
+        phoneNumber: phoneNumber.trim(),
+        email: email.trim(),
+        departmentName: currentDept ? currentDept.title : "General Care",
+        doctorName: targetDoctor ? targetDoctor.name : "First available specialist",
+        date: effectiveDate,
+        timeSlot: selectedTimeSlot,
+        notes: visitNotes.trim(),
+        bookingRef: newRef,
+      });
+
+      setWhatsappUrl(waUrl);
+
+      // Automatically redirect to WhatsApp in a new tab/window
+      try {
+        if (typeof window !== "undefined") {
+          window.open(waUrl, "_blank", "noopener,noreferrer");
+        }
+      } catch (err) {
+        console.error("Popup prevented:", err);
+      }
+
       setStep(4);
     } else {
       setStep((prev) => prev + 1);
@@ -83,6 +128,7 @@ export function BookingModal({
     setPhoneNumber("");
     setEmail("");
     setVisitNotes("");
+    setWhatsappUrl("");
     onClose();
   };
 
@@ -96,7 +142,7 @@ export function BookingModal({
         <div className="sticky top-0 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#ECE7DE] px-6 py-5 flex items-center justify-between z-10">
           <div>
             <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider text-[#687C71] font-semibold mb-1">
-              <span>Hajira Care Desk</span>
+              <span>Hajira Care Desk · WhatsApp: {HOSPITAL_INFO.whatsappDisplay}</span>
               {step < 4 && (
                 <div className="flex items-center gap-1.5 ml-2">
                   {[1, 2, 3].map((s) => (
@@ -128,13 +174,13 @@ export function BookingModal({
         </div>
 
         {/* Modal Body Content */}
-        <div className="p-6 sm:p-8 flex-1">
-          {/* STEP 1: Specialty & Doctor */}
+        <div className="p-6 sm:p-8 space-y-6 flex-1">
+          {/* STEP 1: Department & Doctor */}
           {step === 1 && (
-            <div key="step-1" className="space-y-6 animate-in fade-in slide-in-from-right-3 duration-300">
+            <div key="step-1" className="space-y-6 animate-in fade-in duration-300">
               <div>
                 <label className="block text-xs uppercase tracking-wider font-semibold text-[#55635B] mb-2">
-                  Select Department or Area of Care
+                  Choose Department / Care Specialty
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {DEPARTMENTS.map((dept) => (
@@ -226,7 +272,11 @@ export function BookingModal({
                     type="date"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
-                    min={new Date().toISOString().split("T")[0]}
+                    onFocus={(e) => {
+                      if (!e.target.min) {
+                        e.target.min = new Date().toISOString().split("T")[0];
+                      }
+                    }}
                     className="w-full bg-white border border-[#DCD5C8] rounded-xl px-4 py-3.5 text-sm text-[#18231E] focus:outline-hidden focus:ring-2 focus:ring-[#1C382B] transition-all font-medium"
                   />
                 </div>
@@ -302,7 +352,7 @@ export function BookingModal({
                       required
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
-                      placeholder="+1 (202) 555-0148"
+                      placeholder="+91 94190XXXXX"
                       className="w-full bg-white border border-[#DCD5C8] rounded-xl pl-10 pr-4 py-3 text-sm text-[#18231E] focus:outline-hidden focus:ring-2 focus:ring-[#1C382B] font-medium"
                     />
                     <Phone className="w-4 h-4 text-[#8A9A92] absolute left-3.5 top-3.5" />
@@ -311,7 +361,7 @@ export function BookingModal({
 
                 <div>
                   <label className="block text-xs uppercase tracking-wider font-semibold text-[#55635B] mb-1.5">
-                    Email Address
+                    Email Address (Optional)
                   </label>
                   <div className="relative">
                     <input
@@ -339,13 +389,16 @@ export function BookingModal({
                 ></textarea>
               </div>
 
-              <p className="text-[11px] text-[#788880]">
-                Your information is held in strict medical confidence and only used to prepare your consultation.
-              </p>
+              <div className="p-3 bg-[#EAEFEA] rounded-xl border border-[#D1DDD3] text-xs text-[#1C382B] flex items-center gap-2">
+                <MessageCircle className="w-4 h-4 shrink-0 text-[#1C382B]" />
+                <span>
+                  Upon confirming, your appointment details will float directly to our WhatsApp desk at <strong>{HOSPITAL_INFO.whatsappDisplay}</strong>.
+                </span>
+              </div>
             </div>
           )}
 
-          {/* STEP 4: Confirmation State */}
+          {/* STEP 4: Confirmation & WhatsApp Redirection */}
           {step === 4 && (
             <div key="step-4" className="text-center py-4 space-y-6 animate-in zoom-in-95 duration-400">
               <div className="w-16 h-16 rounded-full bg-[#EAEFEA] text-[#1C382B] flex items-center justify-center mx-auto shadow-inner animate-pulse-glow">
@@ -360,9 +413,28 @@ export function BookingModal({
                   Thank you, {fullName || "Patient"}.
                 </h4>
                 <p className="text-sm text-[#55645D] max-w-md mx-auto">
-                  Our care coordinator will call or message you shortly to confirm doctor availability and provide arrival details.
+                  Your appointment details are being routed directly to our hospital coordinator on WhatsApp (<strong>{HOSPITAL_INFO.whatsappDisplay}</strong>).
                 </p>
               </div>
+
+              {/* WhatsApp Action Button */}
+              {whatsappUrl && (
+                <div className="space-y-2">
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-sm font-semibold py-3.5 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    <MessageCircle className="w-5 h-5 fill-current" />
+                    <span>Open in WhatsApp ({HOSPITAL_INFO.whatsappDisplay})</span>
+                    <ExternalLink className="w-4 h-4 ml-1 opacity-80" />
+                  </a>
+                  <p className="text-[11px] text-[#718279]">
+                    If WhatsApp didn’t open automatically, tap the button above to float your booking.
+                  </p>
+                </div>
+              )}
 
               {/* Summary Card */}
               <div className="p-5 rounded-2xl bg-white border border-[#E4DFD5] text-left space-y-2.5 text-xs text-[#45544D]">
@@ -392,14 +464,14 @@ export function BookingModal({
 
               <div className="p-3 bg-[#EAEFEA] rounded-xl text-xs text-[#1C382B] text-left space-y-1">
                 <p>✦ <strong>Hospital Policy:</strong> Prescription card is valid for two visits within 14 days.</p>
-                <p className="text-[11px] text-[#42544B]">Desk contact: 01952-452973 · Cell: +91 9186022619</p>
+                <p className="text-[11px] text-[#42544B]">Desk contact: {HOSPITAL_INFO.phoneLandline} · WhatsApp: {HOSPITAL_INFO.whatsappDisplay} · Cell: {HOSPITAL_INFO.phoneCell}</p>
               </div>
 
               <button
                 onClick={handleReset}
-                className="w-full bg-[#1C382B] text-white text-sm font-medium py-3.5 rounded-full hover:bg-[#12281E] transition-all hover:shadow-md"
+                className="w-full bg-[#1C382B] text-white text-sm font-medium py-3.5 rounded-full hover:bg-[#12281E] transition-all hover:shadow-md cursor-pointer"
               >
-                Close & Return to Home
+                Done · Return to Home
               </button>
             </div>
           )}
@@ -412,7 +484,7 @@ export function BookingModal({
               <button
                 type="button"
                 onClick={() => setStep((prev) => prev - 1)}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#55635B] hover:text-[#18231E] px-4 py-2.5 rounded-full border border-[#DCD5C9] bg-white transition-all active:scale-95"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#55635B] hover:text-[#18231E] px-4 py-2.5 rounded-full border border-[#DCD5C9] bg-white transition-all active:scale-95 cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>Back</span>
@@ -425,13 +497,13 @@ export function BookingModal({
               type="button"
               onClick={handleNextStep}
               disabled={step === 3 && (!fullName.trim() || !phoneNumber.trim())}
-              className={`inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white px-6 py-3 rounded-full transition-all shadow-xs active:scale-95 ${
+              className={`inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white px-6 py-3 rounded-full transition-all shadow-xs active:scale-95 cursor-pointer ${
                 step === 3 && (!fullName.trim() || !phoneNumber.trim())
                   ? "bg-[#9FB2A8] cursor-not-allowed"
                   : "bg-[#1C382B] hover:bg-[#12281E] hover:shadow-md hover:-translate-y-0.5"
               }`}
             >
-              <span>{step === 3 ? "Confirm Request" : "Continue"}</span>
+              <span>{step === 3 ? "Send & Open WhatsApp" : "Continue"}</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>

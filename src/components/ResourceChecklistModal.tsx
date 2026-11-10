@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { X, Check, Copy, CheckSquare, Printer, Info } from "lucide-react";
+import { X, Check, Copy, Printer, Info } from "lucide-react";
 import { PATIENT_RESOURCES } from "@/data/hospitalData";
 
 interface ResourceChecklistModalProps {

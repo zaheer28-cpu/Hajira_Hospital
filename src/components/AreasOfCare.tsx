@@ -8,6 +8,7 @@ import {
   Activity,
   ShieldCheck,
   Microscope,
+  HeartPulse,
   ArrowUpRight,
   Check,
   Calendar,
@@ -41,6 +42,8 @@ export function AreasOfCare({
         return <ShieldCheck className="w-5 h-5 text-[#1C382B]" />;
       case "Microscope":
         return <Microscope className="w-5 h-5 text-[#1C382B]" />;
+      case "HeartPulse":
+        return <HeartPulse className="w-5 h-5 text-[#1C382B]" />;
       default:
         return <Stethoscope className="w-5 h-5 text-[#1C382B]" />;
     }

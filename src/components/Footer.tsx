@@ -1,5 +1,5 @@
 import React from "react";
-import { Plus, Phone, Mail, MapPin, Clock, AlertCircle, ShieldCheck, Smartphone } from "lucide-react";
+import { Plus, Phone, Mail, MapPin, Clock, AlertCircle, ShieldCheck, Smartphone, MessageCircle } from "lucide-react";
 import { HOSPITAL_INFO } from "@/data/hospitalData";
 
 export function Footer() {
@@ -73,8 +73,17 @@ export function Footer() {
               <span>Talk to our team</span>
             </div>
             <a
+              href={`https://wa.me/91${HOSPITAL_INFO.whatsappNumber.replace(/[^0-9]/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-[#1C382B] hover:text-[#0E1F17] flex items-center gap-1.5 mb-1.5 transition-colors"
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-[#25D366] fill-current" />
+              <span>WhatsApp: {HOSPITAL_INFO.whatsappDisplay}</span>
+            </a>
+            <a
               href={`tel:${HOSPITAL_INFO.phoneLandline}`}
-              className="text-sm font-medium text-[#18231E] hover:text-[#1C382B] block transition-colors"
+              className="text-xs font-medium text-[#18231E] hover:text-[#1C382B] block transition-colors"
             >
               Ph: {HOSPITAL_INFO.phoneLandline}
             </a>
@@ -87,9 +96,10 @@ export function Footer() {
             </a>
             <a
               href={`mailto:${HOSPITAL_INFO.email}`}
-              className="text-xs text-[#48574F] hover:text-[#18231E] block mt-1.5 transition-colors underline break-all"
+              className="text-xs text-[#48574F] hover:text-[#18231E] block mt-1.5 transition-colors underline break-all flex items-center gap-1"
             >
-              {HOSPITAL_INFO.email}
+              <Mail className="w-3 h-3 text-[#64756D] shrink-0" />
+              <span>{HOSPITAL_INFO.email}</span>
             </a>
             <div className="mt-3 p-2 rounded-lg bg-[#F5ECE8] border border-[#EBDCD7] text-[10px] text-[#8C3A27] flex items-start gap-1 leading-snug">
               <AlertCircle className="w-3 h-3 shrink-0 mt-0.5" />

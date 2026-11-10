@@ -1,5 +1,5 @@
 import React from "react";
-import { Phone, Heart, Smartphone } from "lucide-react";
+import { Phone, Heart, Smartphone, MessageCircle } from "lucide-react";
 import { HOSPITAL_INFO } from "@/data/hospitalData";
 
 export function TopBar() {
@@ -26,20 +26,32 @@ export function TopBar() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-2.5 sm:gap-4">
+          <a
+            href={`https://wa.me/91${HOSPITAL_INFO.whatsappNumber.replace(/[^0-9]/g, "")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-[#1C382B] hover:text-[#0E1F17] transition-colors font-medium group"
+          >
+            <MessageCircle className="w-3.5 h-3.5 text-[#25D366] fill-current group-hover:scale-115 transition-transform" />
+            <span>WhatsApp: {HOSPITAL_INFO.whatsappDisplay}</span>
+          </a>
+
+          <span className="text-[#D1CAC0] hidden xs:inline">|</span>
+
           <a
             href={`tel:${HOSPITAL_INFO.phoneLandline}`}
-            className="flex items-center gap-1.5 hover:text-[#1C382B] transition-colors font-medium group"
+            className="hidden sm:flex items-center gap-1.5 hover:text-[#1C382B] transition-colors font-medium group"
           >
             <Phone className="w-3 h-3 text-[#1C382B] group-hover:scale-115 transition-transform" />
             <span>Ph: {HOSPITAL_INFO.phoneLandline}</span>
           </a>
 
-          <span className="text-[#D1CAC0]">|</span>
+          <span className="text-[#D1CAC0] hidden sm:inline">|</span>
 
           <a
             href={`tel:${HOSPITAL_INFO.phoneCell}`}
-            className="flex items-center gap-1.5 hover:text-[#1C382B] transition-colors font-medium group"
+            className="hidden md:flex items-center gap-1.5 hover:text-[#1C382B] transition-colors font-medium group"
           >
             <Smartphone className="w-3 h-3 text-[#1C382B] group-hover:scale-115 transition-transform" />
             <span>Cell: {HOSPITAL_INFO.phoneCell}</span>
