@@ -1,61 +1,130 @@
 import React from "react";
-import { Phone, Heart, Smartphone, MessageCircle } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Smartphone,
+  MessageCircle,
+  Clock,
+  Heart,
+  FileCheck,
+} from "lucide-react";
 import { HOSPITAL_INFO } from "@/data/hospitalData";
+
+function TickerItemSet() {
+  return (
+    <div className="flex items-center gap-6 sm:gap-8 shrink-0 pr-6 sm:pr-8">
+      {/* Hospital Full Address */}
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=Near+JK+Bank+Petrol+Pump+Kanispora+Baramulla"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 hover:text-[#1C382B] hover:underline transition-colors group cursor-pointer"
+        title="View on Google Maps"
+      >
+        <MapPin className="w-3.5 h-3.5 text-emerald-700 shrink-0 group-hover:scale-110 transition-transform" />
+        <span className="font-semibold text-[#18231E]">Address:</span>
+        <span className="text-[#3E4E46]">{HOSPITAL_INFO.address}</span>
+      </a>
+
+      <span className="text-[#D1CAC0] select-none">✦</span>
+
+      {/* Hospital Landline Phone */}
+      <a
+        href={`tel:${HOSPITAL_INFO.phoneLandline}`}
+        className="inline-flex items-center gap-1.5 hover:text-[#1C382B] hover:underline transition-colors group cursor-pointer"
+        title="Call Landline"
+      >
+        <Phone className="w-3.5 h-3.5 text-[#1C382B] shrink-0 group-hover:scale-110 transition-transform" />
+        <span className="font-semibold text-[#18231E]">Landline:</span>
+        <span className="text-[#3E4E46] font-medium">{HOSPITAL_INFO.phoneLandline}</span>
+      </a>
+
+      <span className="text-[#D1CAC0] select-none">✦</span>
+
+      {/* Hospital Cell Phone */}
+      <a
+        href={`tel:${HOSPITAL_INFO.phoneCell.replace(/\s+/g, "")}`}
+        className="inline-flex items-center gap-1.5 hover:text-[#1C382B] hover:underline transition-colors group cursor-pointer"
+        title="Call Mobile"
+      >
+        <Smartphone className="w-3.5 h-3.5 text-[#1C382B] shrink-0 group-hover:scale-110 transition-transform" />
+        <span className="font-semibold text-[#18231E]">Cell:</span>
+        <span className="text-[#3E4E46] font-medium">{HOSPITAL_INFO.phoneCell}</span>
+      </a>
+
+      <span className="text-[#D1CAC0] select-none">✦</span>
+
+      {/* WhatsApp Helpdesk */}
+      <a
+        href={`https://wa.me/91${HOSPITAL_INFO.whatsappNumber.replace(/[^0-9]/g, "")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 hover:text-emerald-700 hover:underline transition-colors group cursor-pointer"
+        title="Chat on WhatsApp"
+      >
+        <MessageCircle className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600/20 shrink-0 group-hover:scale-110 transition-transform" />
+        <span className="font-semibold text-[#18231E]">WhatsApp:</span>
+        <span className="font-bold text-emerald-800">{HOSPITAL_INFO.whatsappDisplay}</span>
+      </a>
+
+      <span className="text-[#D1CAC0] select-none">✦</span>
+
+      {/* OPD Timings */}
+      <div className="inline-flex items-center gap-1.5 text-[#42544B]">
+        <Clock className="w-3.5 h-3.5 text-[#798A82] shrink-0" />
+        <span className="font-semibold text-[#18231E]">Hours:</span>
+        <span>{HOSPITAL_INFO.hours}</span>
+      </div>
+
+      <span className="text-[#D1CAC0] select-none">✦</span>
+
+      {/* Prescription Validity Policy */}
+      <div className="inline-flex items-center gap-1.5 text-[#42544B]">
+        <FileCheck className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+        <span className="font-semibold text-[#18231E]">Prescription Policy:</span>
+        <span>{HOSPITAL_INFO.prescriptionPolicy}</span>
+      </div>
+
+      <span className="text-[#D1CAC0] select-none">✦</span>
+
+      {/* Motto & Regd */}
+      <div className="inline-flex items-center gap-1.5 text-[#42544B]">
+        <Heart className="w-3.5 h-3.5 text-[#1C382B] shrink-0" />
+        <span className="font-semibold text-[#1C382B]">{HOSPITAL_INFO.tagline}</span>
+        <span className="text-[11px] text-[#718279]">(Regd. No. {HOSPITAL_INFO.regdNo})</span>
+      </div>
+    </div>
+  );
+}
 
 export function TopBar() {
   return (
-    <div className="border-b border-[#ECE7DE] bg-[#FAF8F5]/90 text-xs text-[#53625B] px-4 sm:px-8 py-2.5 transition-colors">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-        <div className="flex items-center gap-3 tracking-wide font-normal">
-          <div className="flex items-center gap-1.5">
-            <Heart className="w-3.5 h-3.5 text-[#1C382B]" />
-            <span className="font-medium text-[#1C382B]">{HOSPITAL_INFO.tagline}</span>
-            <span className="text-[#A2B0A8]">·</span>
-            <span className="text-[11px] text-[#718279]">Regd. No. {HOSPITAL_INFO.regdNo}</span>
-          </div>
-
-          <span className="hidden lg:inline-block text-[#D1CAC0]">·</span>
-
-          {/* Live Reception Pulse Status */}
-          <div className="hidden lg:flex items-center gap-1.5 text-[11px] text-[#2F523E]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
-            </span>
-            <span>Kanispora Baramulla · Two visits valid in 14 days</span>
-          </div>
+    <div className="border-b border-[#ECE7DE] bg-[#FAF8F5] text-xs text-[#53625B] relative overflow-hidden transition-colors">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2 flex items-center gap-2.5 sm:gap-3">
+        {/* Fixed badge with live indicator pulse */}
+        <div className="shrink-0 z-20 flex items-center gap-1.5 bg-[#1C382B] text-white text-[11px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+          </span>
+          <span className="hidden sm:inline font-sans">Helpline & Info</span>
+          <span className="sm:hidden font-sans">Live Desk</span>
         </div>
 
-        <div className="flex items-center gap-2.5 sm:gap-4">
-          <a
-            href={`https://wa.me/91${HOSPITAL_INFO.whatsappNumber.replace(/[^0-9]/g, "")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-[#1C382B] hover:text-[#0E1F17] transition-colors font-medium group"
-          >
-            <MessageCircle className="w-3.5 h-3.5 text-[#25D366] fill-current group-hover:scale-115 transition-transform" />
-            <span>WhatsApp: {HOSPITAL_INFO.whatsappDisplay}</span>
-          </a>
+        {/* Moving Ticker Container */}
+        <div
+          className="relative flex-1 overflow-hidden"
+          title="Moving info ticker — hover or tap to pause"
+        >
+          {/* Subtle edge fade masks for smooth entrance & exit */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-12 z-10 bg-gradient-to-r from-[#FAF8F5] to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-12 z-10 bg-gradient-to-l from-[#FAF8F5] to-transparent" />
 
-          <span className="text-[#D1CAC0] hidden xs:inline">|</span>
-
-          <a
-            href={`tel:${HOSPITAL_INFO.phoneLandline}`}
-            className="hidden sm:flex items-center gap-1.5 hover:text-[#1C382B] transition-colors font-medium group"
-          >
-            <Phone className="w-3 h-3 text-[#1C382B] group-hover:scale-115 transition-transform" />
-            <span>Ph: {HOSPITAL_INFO.phoneLandline}</span>
-          </a>
-
-          <span className="text-[#D1CAC0] hidden sm:inline">|</span>
-
-          <a
-            href={`tel:${HOSPITAL_INFO.phoneCell}`}
-            className="hidden md:flex items-center gap-1.5 hover:text-[#1C382B] transition-colors font-medium group"
-          >
-            <Smartphone className="w-3 h-3 text-[#1C382B] group-hover:scale-115 transition-transform" />
-            <span>Cell: {HOSPITAL_INFO.phoneCell}</span>
-          </a>
+          {/* Marquee Track: duplicated identical sets create a seamless infinite loop */}
+          <div className="animate-marquee hover:[animation-play-state:paused] active:[animation-play-state:paused]">
+            <TickerItemSet />
+            <TickerItemSet />
+          </div>
         </div>
       </div>
     </div>
