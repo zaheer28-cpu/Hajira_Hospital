@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   title: "Hajira Hospital · Promoting Health and Smiles · Kanispora Baramulla",
   description:
     "Hajira Hospital (Regd. No. CMO/CE/269), Near J&K Bank / Petrol Pump, Kanispora – Baramulla. Senior faculty & clinicians from GMC Baramulla, SKIMS & SMHS.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
