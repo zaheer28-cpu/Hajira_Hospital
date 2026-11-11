@@ -5,7 +5,7 @@ import {
   Smartphone,
   MessageCircle,
   Clock,
-  Heart,
+  ShieldCheck,
   FileCheck,
 } from "lucide-react";
 import { HOSPITAL_INFO } from "@/data/hospitalData";
@@ -87,11 +87,11 @@ function TickerItemSet() {
 
       <span className="text-[#D1CAC0] select-none">✦</span>
 
-      {/* Motto & Regd */}
+      {/* Official Registration */}
       <div className="inline-flex items-center gap-1.5 text-[#42544B]">
-        <Heart className="w-3.5 h-3.5 text-[#1C382B] shrink-0" />
-        <span className="font-semibold text-[#1C382B]">{HOSPITAL_INFO.tagline}</span>
-        <span className="text-[11px] text-[#718279]">(Regd. No. {HOSPITAL_INFO.regdNo})</span>
+        <ShieldCheck className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+        <span className="font-semibold text-[#18231E]">Regd. No:</span>
+        <span className="text-[11px] text-[#53625B] font-medium">{HOSPITAL_INFO.regdNo}</span>
       </div>
     </div>
   );

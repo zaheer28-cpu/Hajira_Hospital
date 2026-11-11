@@ -49,16 +49,16 @@ export function Navbar({ onOpenBookingModal }: NavbarProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
         {/* Brand Logo with gentle hover pulse */}
-        <a href="#" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-full bg-[#1C382B] flex items-center justify-center text-white text-base font-semibold group-hover:scale-108 group-hover:rotate-90 transition-all duration-500 shadow-xs">
+        <a href="#" className="flex items-center gap-2.5 sm:gap-3 group">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#1C382B] flex items-center justify-center text-white text-base font-semibold group-hover:scale-108 group-hover:rotate-90 transition-all duration-500 shadow-xs shrink-0">
             <Plus className="w-4 h-4 stroke-[2.5]" />
           </div>
           <div className="flex flex-col">
-            <span className="font-editorial text-2xl font-normal tracking-tight text-[#18231E] leading-none group-hover:text-[#1C382B] transition-colors">
-              Hajira
+            <span className="font-editorial text-xl sm:text-2xl font-normal tracking-tight text-[#18231E] leading-none group-hover:text-[#1C382B] transition-colors">
+              Hajira Hospital
             </span>
-            <span className="text-[9px] tracking-[0.28em] uppercase text-[#73827A] font-semibold mt-0.5">
-              H O S P I T A L
+            <span className="text-[10px] sm:text-[11px] tracking-wide text-[#5A6D63] font-medium mt-1">
+              Promoting Health and Care
             </span>
           </div>
         </a>

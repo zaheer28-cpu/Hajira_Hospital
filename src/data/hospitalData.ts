@@ -24,7 +24,7 @@ export interface Department {
 
 export const HOSPITAL_INFO = {
   name: "Hajira Hospital",
-  tagline: "Promoting Health and Smiles",
+  tagline: "Promoting Health and Care",
   secondaryTagline: "A little more care. A lot more human.",
   regdNo: "CMO/CE/269",
   address: "Near J&K Bank / Petrol Pump, Kanispora – Baramulla, Jammu & Kashmir",
