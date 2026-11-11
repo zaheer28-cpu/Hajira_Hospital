@@ -58,7 +58,7 @@ export function Navbar({ onOpenBookingModal }: NavbarProps) {
               Hajira Hospital
             </span>
             <span className="text-[10px] sm:text-[11px] tracking-wide text-[#5A6D63] font-medium mt-1">
-              Promoting Health and Care
+              Promoting Health and Smiles
             </span>
           </div>
         </a>

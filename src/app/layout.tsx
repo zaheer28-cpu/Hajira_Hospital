@@ -16,7 +16,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Hajira Hospital · Promoting Health and Care · Kanispora Baramulla",
+  title: "Hajira Hospital · Promoting Health and Smiles · Kanispora Baramulla",
   description:
     "Hajira Hospital (Regd. No. CMO/CE/269), Near J&K Bank / Petrol Pump, Kanispora – Baramulla. Senior faculty & clinicians from GMC Baramulla, SKIMS & SMHS.",
 };

@@ -17,7 +17,7 @@ export function Hero({ onOpenBookingModal }: HeroProps) {
             <div className="flex items-center gap-2 mb-4 animate-in fade-in slide-in-from-bottom-2 duration-500">
               <span className="w-5 h-[1px] bg-[#6B7B73]"></span>
               <p className="text-[11px] uppercase tracking-[0.28em] text-[#63746C] font-semibold">
-                Promoting Health & Care · Kanispora, Baramulla
+                Promoting Health & Smiles · Kanispora, Baramulla
               </p>
             </div>
 

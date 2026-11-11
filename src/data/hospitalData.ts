@@ -24,7 +24,7 @@ export interface Department {
 
 export const HOSPITAL_INFO = {
   name: "Hajira Hospital",
-  tagline: "Promoting Health and Care",
+  tagline: "Promoting Health and Smiles",
   secondaryTagline: "A little more care. A lot more human.",
   regdNo: "CMO/CE/269",
   address: "Near J&K Bank / Petrol Pump, Kanispora – Baramulla, Jammu & Kashmir",
@@ -36,6 +36,8 @@ export const HOSPITAL_INFO = {
   email: "shafkatlone786@gmail.com",
   prescriptionPolicy: "Valid for two visits, within 14 days",
   hours: "Monday – Saturday · 8:00 am – 6:00 pm",
+  instagramUrl: "https://www.instagram.com/hajira.hospital?vrfl=Y2p3OTJtZ2ttbGg2",
+  facebookUrl: "https://www.facebook.com/61586715028156/",
 };
 
 export const DEPARTMENTS: Department[] = [
