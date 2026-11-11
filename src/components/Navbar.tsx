@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X, Plus, Calendar } from "lucide-react";
+import { Menu, X, Calendar } from "lucide-react";
+import { HajiraLogo } from "@/components/HajiraLogo";
 
 interface NavbarProps {
   onOpenBookingModal: (departmentId?: string, doctorId?: string) => void;
@@ -50,8 +51,8 @@ export function Navbar({ onOpenBookingModal }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
         {/* Brand Logo with gentle hover pulse */}
         <a href="#" className="flex items-center gap-2.5 sm:gap-3 group">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#1C382B] flex items-center justify-center text-white text-base font-semibold group-hover:scale-108 group-hover:rotate-90 transition-all duration-500 shadow-xs shrink-0">
-            <Plus className="w-4 h-4 stroke-[2.5]" />
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1C382B] flex items-center justify-center text-white p-1.5 group-hover:scale-105 group-hover:bg-[#142920] transition-all duration-300 shadow-xs shrink-0">
+            <HajiraLogo className="w-6 h-6 fill-white" />
           </div>
           <div className="flex flex-col">
             <span className="font-editorial text-xl sm:text-2xl font-normal tracking-tight text-[#18231E] leading-none group-hover:text-[#1C382B] transition-colors">

@@ -7,12 +7,39 @@ import {
   Clock,
   ShieldCheck,
   FileCheck,
+  Activity,
+  Pill,
 } from "lucide-react";
 import { HOSPITAL_INFO } from "@/data/hospitalData";
 
 function TickerItemSet() {
   return (
     <div className="flex items-center gap-6 sm:gap-8 shrink-0 pr-6 sm:pr-8">
+      {/* 24x7 Critical Care Badge */}
+      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100/80 border border-emerald-300 text-emerald-950 font-bold text-[11px] shadow-2xs">
+        <Activity className="w-3.5 h-3.5 text-emerald-700 shrink-0 animate-pulse" />
+        <span>Critical Care 24×7</span>
+      </div>
+
+      <span className="text-[#D1CAC0] select-none">✦</span>
+
+      {/* 24x7 Pharmacy Badge */}
+      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EDE7DC] border border-[#D5CDBD] text-[#1C382B] font-bold text-[11px] shadow-2xs">
+        <Pill className="w-3.5 h-3.5 text-emerald-800 shrink-0" />
+        <span>24×7 Pharmacy</span>
+      </div>
+
+      <span className="text-[#D1CAC0] select-none">✦</span>
+
+      {/* OPD Timings */}
+      <div className="inline-flex items-center gap-1.5 text-[#3E4E46]">
+        <Clock className="w-3.5 h-3.5 text-emerald-800 shrink-0" />
+        <span className="font-bold text-[#18231E]">Available:</span>
+        <span className="font-semibold text-[#18231E]">Monday to Sunday · 8:00 AM – 8:00 PM</span>
+      </div>
+
+      <span className="text-[#D1CAC0] select-none">✦</span>
+
       {/* Hospital Full Address */}
       <a
         href="https://www.google.com/maps/search/?api=1&query=Near+JK+Bank+Petrol+Pump+Kanispora+Baramulla"
@@ -69,15 +96,6 @@ function TickerItemSet() {
 
       <span className="text-[#D1CAC0] select-none">✦</span>
 
-      {/* OPD Timings */}
-      <div className="inline-flex items-center gap-1.5 text-[#42544B]">
-        <Clock className="w-3.5 h-3.5 text-[#798A82] shrink-0" />
-        <span className="font-semibold text-[#18231E]">Hours:</span>
-        <span>{HOSPITAL_INFO.hours}</span>
-      </div>
-
-      <span className="text-[#D1CAC0] select-none">✦</span>
-
       {/* Prescription Validity Policy */}
       <div className="inline-flex items-center gap-1.5 text-[#42544B]">
         <FileCheck className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
@@ -107,8 +125,8 @@ export function TopBar() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
           </span>
-          <span className="hidden sm:inline font-sans">Helpline & Info</span>
-          <span className="sm:hidden font-sans">Live Desk</span>
+          <span className="hidden sm:inline font-sans">Critical Care 24×7</span>
+          <span className="sm:hidden font-sans">24×7 Care</span>
         </div>
 
         {/* Moving Ticker Container */}

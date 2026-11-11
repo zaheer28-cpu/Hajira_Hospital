@@ -281,7 +281,7 @@ export function BookingModal({
                   />
                 </div>
                 <p className="text-[11px] text-[#788880] mt-1.5">
-                  Clinic hours: Monday through Saturday, 8:00 am – 6:00 pm.
+                  Clinic hours: Monday through Sunday, 8:00 am – 8:00 pm (Critical Care & Pharmacy open 24×7).
                 </p>
               </div>
 
@@ -291,9 +291,9 @@ export function BookingModal({
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
-                    { id: "morning", label: "Morning", time: "09:00 am – 12:00 pm" },
-                    { id: "afternoon", label: "Afternoon", time: "01:00 pm – 04:00 pm" },
-                    { id: "evening", label: "Late Day", time: "04:00 pm – 06:00 pm" },
+                    { id: "morning", label: "Morning", time: "08:00 am – 12:00 pm" },
+                    { id: "afternoon", label: "Afternoon", time: "12:00 pm – 04:00 pm" },
+                    { id: "evening", label: "Evening", time: "04:00 pm – 08:00 pm" },
                   ].map((slot) => (
                     <button
                       type="button"

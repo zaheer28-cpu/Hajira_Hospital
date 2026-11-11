@@ -1,0 +1,44 @@
+import React from "react";
+
+interface HajiraLogoProps {
+  className?: string;
+  crossClassName?: string;
+  handsClassName?: string;
+}
+
+/**
+ * Official Hajira Hospital Emblem:
+ * Two caring hands cupping and cradling a medical cross (+) in the center.
+ */
+export function HajiraLogo({
+  className = "w-6 h-6",
+  crossClassName = "fill-current",
+  handsClassName = "fill-current",
+}: HajiraLogoProps) {
+  return (
+    <svg
+      viewBox="0 0 100 90"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Hajira Hospital Logo"
+    >
+      {/* Central Medical Cross (+) */}
+      <path
+        d="M44 8C44 6.9 44.9 6 46 6H54C55.1 6 56 6.9 56 8V20H68C69.1 20 70 20.9 70 22V30C70 31.1 69.1 32 68 32H56V44C56 45.1 55.1 46 54 46H46C44.9 46 44 45.1 44 44V32H32C30.9 32 30 31.1 30 30V22C30 20.9 30.9 20 32 20H44V8Z"
+        className={crossClassName}
+      />
+
+      {/* Left Caring Hand */}
+      <path
+        d="M43 82H36C29.5 82 24.2 78.5 19.5 72.5C13.8 65 11 54.8 11.8 41C12.2 34.8 13.8 29.5 16 25.5C16.8 24 18.5 24.5 18.9 26.2C19.8 29.8 19.6 35.2 20.2 40.2C21 50.5 24.8 59.8 31.5 65.5C35 68.5 38.5 70 42 70.5V82H43Z"
+        className={handsClassName}
+      />
+
+      {/* Right Caring Hand */}
+      <path
+        d="M57 82H64C70.5 82 75.8 78.5 80.5 72.5C86.2 65 89 54.8 88.2 41C87.8 34.8 86.2 29.5 84 25.5C83.2 24 81.5 24.5 81.1 26.2C80.2 29.8 80.4 35.2 79.8 40.2C79 50.5 75.2 59.8 68.5 65.5C65 68.5 61.5 70 58 70.5V82H57Z"
+        className={handsClassName}
+      />
+    </svg>
+  );
+}

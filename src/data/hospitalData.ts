@@ -35,7 +35,9 @@ export const HOSPITAL_INFO = {
   whatsappDisplay: "+91 6005090515",
   email: "shafkatlone786@gmail.com",
   prescriptionPolicy: "Valid for two visits, within 14 days",
-  hours: "Monday – Saturday · 8:00 am – 6:00 pm",
+  hours: "Monday – Sunday · 8:00 am – 8:00 pm",
+  pharmacy: "24×7 Pharmacy",
+  criticalCare: "Critical Care 24×7",
   instagramUrl: "https://www.instagram.com/hajira.hospital?vrfl=Y2p3OTJtZ2ttbGg2",
   facebookUrl: "https://www.facebook.com/61586715028156/",
 };
