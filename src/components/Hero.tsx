@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowUpRight, MessageSquareHeart, Sparkles } from "lucide-react";
+import { ArrowUpRight, MessageSquareHeart } from "lucide-react";
 
 interface HeroProps {
   onOpenBookingModal: (departmentId?: string) => void;

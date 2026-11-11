@@ -76,15 +76,22 @@ export function AboutHajira({ onOpenBookingModal }: AboutHajiraProps) {
                   </div>
                 </div>
 
-                {/* Action Link */}
-                <div className="flex items-center gap-4">
+                {/* Action Links */}
+                <div className="flex flex-wrap items-center gap-3.5">
                   <a
                     href="#doctors"
                     className="inline-flex items-center gap-1.5 bg-[#1C382B] hover:bg-[#12281E] text-white text-sm font-medium px-6 py-3.5 rounded-full transition-all duration-300 group shadow-xs hover:shadow-md hover:-translate-y-0.5"
                   >
-                    <span>Get to know Hajira</span>
+                    <span>Get to know our doctors</span>
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
                   </a>
+
+                  <button
+                    onClick={onOpenBookingModal}
+                    className="inline-flex items-center gap-1.5 border border-[#1C382B] text-[#1C382B] hover:bg-[#1C382B] hover:text-white text-sm font-medium px-5 py-3 rounded-full transition-all duration-300 shadow-2xs hover:shadow-xs hover:-translate-y-0.5 cursor-pointer"
+                  >
+                    <span>Schedule consultation</span>
+                  </button>
                 </div>
               </div>
 

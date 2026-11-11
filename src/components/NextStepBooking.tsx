@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Phone, Calendar, ArrowRight, Smartphone, Mail } from "lucide-react";
+import { Phone, Calendar, ArrowRight, Mail, MessageCircle } from "lucide-react";
 import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 import { HOSPITAL_INFO } from "@/data/hospitalData";
 
@@ -41,7 +41,7 @@ export function NextStepBooking({ onOpenBookingModal }: NextStepBookingProps) {
                 Conveniently located Near J&K Bank / Petrol Pump in Kanispora – Baramulla. Book your consultation with our experienced specialists or reach our reception desk directly.
               </p>
 
-              {/* Contact Card with Landline, Cell, and Email */}
+              {/* Contact Card with Landline, WhatsApp, and Email */}
               <div className="space-y-2.5 w-full max-w-md">
                 <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#EFECE6] border border-[#E1DBD0] card-hover-lift">
                   <div className="flex items-center gap-3">
@@ -63,23 +63,25 @@ export function NextStepBooking({ onOpenBookingModal }: NextStepBookingProps) {
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#EFECE6] border border-[#E1DBD0] card-hover-lift">
+                <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#EAEFEA] border border-[#D5E1D8] card-hover-lift">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#1C382B] text-white flex items-center justify-center shrink-0">
-                      <Smartphone className="w-4 h-4" />
+                    <div className="w-9 h-9 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <MessageCircle className="w-4 h-4 fill-current" />
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase tracking-wider text-[#63746C] font-medium">Mobile / WhatsApp</p>
+                      <p className="text-[10px] uppercase tracking-wider text-[#1C382B] font-semibold">WhatsApp Appointment Desk</p>
                       <a
-                        href={`tel:${HOSPITAL_INFO.phoneCell}`}
+                        href={`https://wa.me/91${HOSPITAL_INFO.whatsappNumber.replace(/[^0-9]/g, "")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="font-editorial text-lg font-medium text-[#18231E] hover:text-[#1C382B] transition-colors"
                       >
-                        {HOSPITAL_INFO.phoneCell}
+                        {HOSPITAL_INFO.whatsappDisplay}
                       </a>
                     </div>
                   </div>
-                  <span className="text-[11px] text-[#2F523E] font-medium px-2.5 py-1 bg-[#E1E8E2] rounded-full">
-                    Fast line
+                  <span className="text-[11px] text-[#1C382B] font-medium px-2.5 py-1 bg-white rounded-full border border-[#C8D9CD]">
+                    Instant Chat ↗
                   </span>
                 </div>
 
@@ -120,6 +122,7 @@ export function NextStepBooking({ onOpenBookingModal }: NextStepBookingProps) {
                         onChange={(e) => setSelectedService(e.target.value)}
                         className="w-full appearance-none bg-[#FAF8F5] border border-[#DCD5C8] rounded-xl px-4 py-3.5 text-sm text-[#18231E] focus:outline-hidden focus:ring-2 focus:ring-[#1C382B] transition-all cursor-pointer font-medium group-hover:border-[#1C382B]/60"
                       >
+                        <option value="gynaecology">Gynaecology & Obstetrics (Consultant Obstetrician & Gynaecologist)</option>
                         <option value="ent-surgery">ENT & Head/Neck Surgery (Prof. Dr. Shafkat Ah. Lone)</option>
                         <option value="general-surgery">General & Laparoscopic Surgery (Dr. Shakeeb / Dr. Lubna / Dr. Aabid)</option>
                         <option value="cardiology">Cardiology & Heart Care (Dr. Mustafa Bashir)</option>
@@ -144,7 +147,7 @@ export function NextStepBooking({ onOpenBookingModal }: NextStepBookingProps) {
                   </button>
 
                   <p className="text-[11px] text-[#788880] text-center leading-normal pt-1">
-                    Near J&K Bank / Petrol Pump, Kanispora – Baramulla · Ph: {HOSPITAL_INFO.phoneLandline} · Cell: {HOSPITAL_INFO.phoneCell}
+                    Near J&K Bank / Petrol Pump, Kanispora – Baramulla · WhatsApp: {HOSPITAL_INFO.whatsappDisplay} · Landline: {HOSPITAL_INFO.phoneLandline}
                   </p>
                 </form>
               </div>

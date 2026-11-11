@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { X, Calendar, GraduationCap, Languages, Clock, Award, Stethoscope, ShieldCheck } from "lucide-react";
-import { Doctor } from "@/data/hospitalData";
+import { X, Calendar, GraduationCap, Languages, Clock, Award, ShieldCheck } from "lucide-react";
+import { Doctor, getDoctorInitials } from "@/data/hospitalData";
 
 interface DoctorBioModalProps {
   doctor: Doctor | null;
@@ -58,12 +58,23 @@ export function DoctorBioModal({
         <div className="p-6 sm:p-8 space-y-6">
           {/* Top Profile Summary */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
-            <div className="w-28 h-28 rounded-2xl overflow-hidden bg-[#ECE8E0] border border-[#E0D9CE] shrink-0">
-              <img
-                src={doctor.image}
-                alt={doctor.name}
-                className="w-full h-full object-cover object-top filter saturate-[0.92]"
-              />
+            <div className="w-28 h-28 rounded-2xl overflow-hidden bg-gradient-to-br from-[#FAF8F5] via-[#EFECE6] to-[#E3DDD2] border border-[#E0D9CE] shrink-0 flex items-center justify-center">
+              {doctor.image ? (
+                <img
+                  src={doctor.image}
+                  alt={doctor.name}
+                  className="w-full h-full object-cover object-top filter saturate-[0.92]"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center p-3 text-center select-none">
+                  <span className="font-editorial text-3xl font-semibold text-[#1C382B]">
+                    {getDoctorInitials(doctor.name)}
+                  </span>
+                  <span className="text-[9px] uppercase tracking-wider text-[#63746C] font-semibold mt-1">
+                    Specialist
+                  </span>
+                </div>
+              )}
             </div>
             <div className="text-center sm:text-left">
               <h3 className="font-editorial text-3xl text-[#18231E] font-normal mb-1">

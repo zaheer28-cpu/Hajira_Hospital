@@ -4,7 +4,7 @@ export interface Doctor {
   departmentId: string;
   departmentName: string;
   tagline: string;
-  image: string;
+  image?: string;
   credentials: string;
   experience: string;
   education: string;
@@ -31,6 +31,8 @@ export const HOSPITAL_INFO = {
   shortAddress: "Kanispora – Baramulla",
   phoneLandline: "01952-452973",
   phoneCell: "+91 9186022619",
+  whatsappNumber: "600509015",
+  whatsappDisplay: "+91 600509015",
   email: "shafkatlone786@gmail.com",
   prescriptionPolicy: "Valid for two visits, within 14 days",
   hours: "Monday – Saturday · 8:00 am – 6:00 pm",
@@ -38,53 +40,92 @@ export const HOSPITAL_INFO = {
 
 export const DEPARTMENTS: Department[] = [
   {
+    id: "gynaecology",
+    title: "Gynaecology & Obstetrics",
+    description: "Comprehensive women’s health, compassionate antenatal care, maternal wellness, and advanced gynaecological consultations.",
+    iconName: "HeartPulse",
+    bulletPoints: [
+      "Antenatal, prenatal & post-natal maternal care",
+      "Comprehensive women’s wellness & hormonal health",
+      "Gynaecological screening, ultrasound & pelvic health",
+    ],
+  },
+  {
     id: "ent-surgery",
     title: "ENT & Head/Neck Surgery",
     description: "Advanced surgical & medical care for ear, nose, throat, and head & neck disorders.",
     iconName: "Stethoscope",
-    bulletPoints: ["Head & neck surgical consultation", "Ear microsurgery & hearing evaluation", "Sinusitis & nasal airway surgery"],
+    bulletPoints: [
+      "Head & neck surgical consultation",
+      "Ear microsurgery & hearing evaluation",
+      "Sinusitis & nasal airway surgery",
+    ],
   },
   {
     id: "general-surgery",
     title: "General & Laparoscopic Surgery",
     description: "State-of-the-art minimal access and laparoscopic procedures for digestive and surgical diseases.",
     iconName: "ShieldCheck",
-    bulletPoints: ["Laparoscopic gallbladder & hernia surgery", "Digestive & gastrointestinal procedures", "Minimal access day-care surgery"],
+    bulletPoints: [
+      "Laparoscopic gallbladder & hernia surgery",
+      "Digestive & gastrointestinal procedures",
+      "Minimal access day-care surgery",
+    ],
   },
   {
     id: "cardiology",
     title: "Cardiology & Heart Care",
     description: "Expert cardiac evaluation, preventative heart health, and interventional clinical consultation.",
     iconName: "Activity",
-    bulletPoints: ["Hypertension & coronary artery evaluation", "Preventive cardiology consultations", "ECG & cardiovascular diagnostics"],
+    bulletPoints: [
+      "Hypertension & coronary artery evaluation",
+      "Preventive cardiology consultations",
+      "ECG & cardiovascular diagnostics",
+    ],
   },
   {
     id: "paediatrics",
     title: "Paediatrics & Child Health",
     description: "Compassionate, expert medical care for infants, growing children, and adolescents.",
     iconName: "Baby",
-    bulletPoints: ["Childhood well-visits & developmental reviews", "Acute pediatric infections & asthma", "Parental guidance & newborn care"],
+    bulletPoints: [
+      "Childhood well-visits & developmental reviews",
+      "Acute pediatric infections & asthma",
+      "Parental guidance & newborn care",
+    ],
   },
   {
     id: "orthopaedics",
     title: "Orthopaedics & Joint Care",
     description: "Specialized care for bones, joints, fractures, sports injuries, and arthritis management.",
     iconName: "ShieldCheck",
-    bulletPoints: ["Fracture care & trauma management", "Arthritis & knee/shoulder joint care", "Spine, posture & mobility rehabilitation"],
+    bulletPoints: [
+      "Fracture care & trauma management",
+      "Arthritis & knee/shoulder joint care",
+      "Spine, posture & mobility rehabilitation",
+    ],
   },
   {
     id: "pulmonology",
     title: "Chest & Respiratory Medicine",
     description: "Comprehensive diagnostics and treatment for lungs, chronic cough, asthma, and breathing disorders.",
     iconName: "Microscope",
-    bulletPoints: ["Asthma, COPD & chronic bronchitis", "Allergy testing & respiratory therapy", "Chest diagnostic evaluations"],
+    bulletPoints: [
+      "Asthma, COPD & chronic bronchitis",
+      "Allergy testing & respiratory therapy",
+      "Chest diagnostic evaluations",
+    ],
   },
   {
     id: "general-medicine",
     title: "Internal & General Medicine",
     description: "Comprehensive adult medical diagnosis, chronic disease care, and preventive health reviews.",
     iconName: "HeartHandshake",
-    bulletPoints: ["Diabetes & metabolic disease balance", "Fever, infections & viral illness care", "Routine comprehensive health checkups"],
+    bulletPoints: [
+      "Diabetes & metabolic disease balance",
+      "Fever, infections & viral illness care",
+      "Routine comprehensive health checkups",
+    ],
   },
 ];
 
@@ -95,14 +136,28 @@ export const DOCTORS: Doctor[] = [
     departmentId: "ent-surgery",
     departmentName: "ENT & Head/Neck Surgery",
     tagline: "Head & Neck Surgeon · HOD Department of ENT GMC Baramulla",
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80",
+    image: "",
     credentials: "MBBS, MS (ENT)",
     regdNo: "4587",
     experience: "20+ years surgical expertise",
     education: "Master of Surgery (ENT), HOD ENT at GMC Baramulla",
     languages: ["Kashmiri", "Urdu", "English", "Hindi"],
     bio: "Prof. Dr. Shafkat Ah. Lone is a renowned Head & Neck Surgeon and Head of Department of ENT at Government Medical College Baramulla. He brings decades of specialized operative and clinical experience in complex ear, nose, throat, and head-neck conditions.",
-    availableDays: ["Monday", "Wednesday", "Friday"],
+    availableDays: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  },
+  {
+    id: "Dr. Rafia Aziz",
+    name: "Dr. Rafia Aziz",
+    departmentId: "gynaecology",
+    departmentName: "Gynaecology & Obstetrics",
+    tagline: "Consultant Obstetrician & Gynaecologist · Women’s Health Specialist",
+    image: "",
+    credentials: "MBBS, MS (Obstetrics & Gynaecology)",
+    experience: "10+ yrs experience Specialized in Maternal, Antenatal & Gynaecological Health",
+    education: "MS Obstetrics & Gynaecology",
+    languages: ["Kashmiri", "Urdu", "English"],
+    bio: "Offering compassionate, specialized healthcare for women at every stage of life — from antenatal counseling, pregnancy wellness, and reproductive health to gynaecological screening and menopause support.",
+    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
   },
   {
     id: "dr-shakeeb-nabi-lone",
@@ -110,14 +165,14 @@ export const DOCTORS: Doctor[] = [
     departmentId: "general-surgery",
     departmentName: "General & Laparoscopic Surgery",
     tagline: "Consultant General & Laparoscopic Surgeon · Minimal Access Surgery",
-    image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=800&q=80",
+    image: "",
     credentials: "MBBS, MS, FMAS",
     regdNo: "10544",
-    experience: "Fellowship in Minimal Access Surgery & Digestive Disease",
+    experience: "10+ yrs experience in Minimal Access Surgery & Digestive Disease",
     education: "MS General Surgery, Fellowship Minimal Access Surgery (FMAS)",
     languages: ["Kashmiri", "Urdu", "English"],
     bio: "Dr. Shakeeb Nabi Lone specializes in advanced laparoscopic (keyhole) procedures and digestive diseases, providing faster patient recovery, minimal scarring, and modern surgical care.",
-    availableDays: ["Tuesday", "Thursday", "Saturday"],
+    availableDays: ["Saturday"],
   },
   {
     id: "dr-mustafa-bashir",
@@ -125,7 +180,7 @@ export const DOCTORS: Doctor[] = [
     departmentId: "cardiology",
     departmentName: "Cardiology & Heart Care",
     tagline: "Interventional Cardiologist · Assistant Prof. Dept of Cardiology GMC Baramulla",
-    image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=800&q=80",
+    image: "",
     credentials: "MBBS, MD (SKIMS), DM/Dr NB (Cardiology GMC Srinagar)",
     regdNo: "8344",
     experience: "Assistant Professor, Dept of Cardiology GMC Baramulla",
@@ -140,7 +195,7 @@ export const DOCTORS: Doctor[] = [
     departmentId: "paediatrics",
     departmentName: "Paediatrics & Child Health",
     tagline: "HOD Department of Paediatric GMC Baramulla",
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80",
+    image: "",
     credentials: "MBBS, MD",
     regdNo: "1417",
     experience: "Professor & Head of Paediatrics",
@@ -155,7 +210,7 @@ export const DOCTORS: Doctor[] = [
     departmentId: "general-surgery",
     departmentName: "General Surgery",
     tagline: "Senior Consultant General Surgeon (From SMHS) · J&K Health Services",
-    image: "https://images.unsplash.com/photo-1594824813589-cf771488c9f5?auto=format&fit=crop&w=800&q=80",
+    image: "",
     credentials: "MBBS, MS",
     regdNo: "6186",
     experience: "Senior Consultant, SMHS & J&K Health Services",
@@ -170,7 +225,7 @@ export const DOCTORS: Doctor[] = [
     departmentId: "orthopaedics",
     departmentName: "Orthopaedics & Joint Care",
     tagline: "Orthopaedic Specialist · Bone & Joint Care",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80",
+    image: "",
     credentials: "MS Orthopaedics",
     regdNo: "13228",
     experience: "Specialist Orthopaedic Surgeon",
@@ -185,7 +240,7 @@ export const DOCTORS: Doctor[] = [
     departmentId: "pulmonology",
     departmentName: "Chest & Respiratory Medicine",
     tagline: "Member American Thoracic Society · Registrar Chest Disease Hospital Srinagar",
-    image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80",
+    image: "",
     credentials: "MBBS, MD",
     regdNo: "7109",
     experience: "Registrar, Chest Disease Hospital Srinagar",
@@ -200,7 +255,7 @@ export const DOCTORS: Doctor[] = [
     departmentId: "general-surgery",
     departmentName: "General Surgery",
     tagline: "Assistant Prof. Department of General Surgery GMC Baramulla",
-    image: "https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&w=800&q=80",
+    image: "",
     credentials: "MBBS, MS",
     regdNo: "1846",
     experience: "Assistant Professor, GMC Baramulla",
@@ -215,7 +270,7 @@ export const DOCTORS: Doctor[] = [
     departmentId: "general-medicine",
     departmentName: "Internal Medicine",
     tagline: "Ex. Physician Taif Saudi Arabia & Ex. Sr. Resident Medicines GMC Baramulla",
-    image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80",
+    image: "",
     credentials: "Physician & Internal Medicine Specialist",
     experience: "International & Senior Residency Clinical Practice",
     education: "Ex. Senior Resident GMC Baramulla, Ex. Physician Taif (KSA)",
@@ -224,6 +279,49 @@ export const DOCTORS: Doctor[] = [
     availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday"],
   },
 ];
+
+export function getDoctorInitials(name: string): string {
+  const clean = name.replace(/^(Prof\.|Dr\.|Ah\.|Mr\.|Mrs\.|Ms\.)\s*/gi, "").trim();
+  const parts = clean.split(/\s+/).filter(Boolean);
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+  return clean.slice(0, 2).toUpperCase() || "MD";
+}
+
+export function createWhatsAppAppointmentUrl(details: {
+  fullName: string;
+  phoneNumber: string;
+  email?: string;
+  departmentName: string;
+  doctorName?: string;
+  date?: string;
+  timeSlot?: string;
+  notes?: string;
+  bookingRef: string;
+}): string {
+  const lines = [
+    `*New Appointment Request · Hajira Hospital*`,
+    `🔖 *Booking Ref:* ${details.bookingRef}`,
+    ``,
+    `👤 *Patient Name:* ${details.fullName}`,
+    `📞 *Phone:* ${details.phoneNumber}`,
+    details.email ? `📧 *Email:* ${details.email}` : null,
+    `🩺 *Department:* ${details.departmentName}`,
+    `👨‍⚕️ *Doctor Preference:* ${details.doctorName || "First available specialist"}`,
+    `📅 *Preferred Date:* ${details.date || "Next available clinic date"}`,
+    `⏰ *Time Slot:* ${details.timeSlot || "Standard Clinic Window"}`,
+    details.notes ? `📝 *Reason/Symptoms:* ${details.notes}` : null,
+    ``,
+    `🏥 *Hajira Hospital*, Kanispora – Baramulla (Regd. No. CMO/CE/269)`,
+    `✦ *Policy:* Prescription valid for two visits within 14 days`,
+  ].filter(Boolean);
+
+  const cleanPhone = HOSPITAL_INFO.whatsappNumber.replace(/[^0-9]/g, "");
+  // Prepend 91 for India if not already present
+  const targetNumber = cleanPhone.startsWith("91") && cleanPhone.length > 10 ? cleanPhone : `91${cleanPhone}`;
+  return `https://wa.me/${targetNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
 
 export const PATIENT_RESOURCES = [
   {

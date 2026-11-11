@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { ArrowUpRight, Calendar, Stethoscope } from "lucide-react";
-import { DOCTORS, Doctor } from "@/data/hospitalData";
+import { DOCTORS, Doctor, getDoctorInitials } from "@/data/hospitalData";
 import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 import { SpotlightCard } from "@/components/SpotlightCard";
 
@@ -92,13 +92,27 @@ export function OurDoctors({
                       : "border-[#E7E2D8] hover:border-[#1C382B]/50"
                   }`}
                 >
-                  {/* Portrait */}
-                  <div className="relative aspect-[4/4] overflow-hidden bg-[#ECE8E0]">
-                    <img
-                      src={doctor.image}
-                      alt={doctor.name}
-                      className="w-full h-full object-cover object-top group-hover:scale-106 transition-transform duration-700 ease-out filter saturate-[0.92]"
-                    />
+                  {/* Portrait or Dignified Clinician Monogram */}
+                  <div className="relative aspect-[4/4] overflow-hidden bg-gradient-to-br from-[#FAF8F5] via-[#EFECE6] to-[#E3DDD2] flex items-center justify-center">
+                    {doctor.image ? (
+                      <img
+                        src={doctor.image}
+                        alt={doctor.name}
+                        className="w-full h-full object-cover object-top group-hover:scale-106 transition-transform duration-700 ease-out filter saturate-[0.92]"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center relative select-none">
+                        <div className="w-24 h-24 rounded-full bg-white/95 border border-[#D5CEC2] shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 group-hover:border-[#1C382B]/60 transition-all duration-300">
+                          <span className="font-editorial text-3xl font-semibold tracking-tight text-[#1C382B]">
+                            {getDoctorInitials(doctor.name)}
+                          </span>
+                        </div>
+                        <span className="text-[10px] tracking-[0.2em] uppercase font-semibold text-[#5B6C64]">
+                          {doctor.departmentName}
+                        </span>
+                        <span className="text-[11px] text-[#7B8B83] mt-0.5">Hajira Specialist</span>
+                      </div>
+                    )}
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 items-center">
                       <span className="bg-white/95 backdrop-blur-xs text-[10px] tracking-wider uppercase text-[#1C382B] font-semibold px-2.5 py-1 rounded-full border border-[#E4DFD5]">
                         {doctor.departmentName}
