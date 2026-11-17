@@ -83,15 +83,16 @@ export function OurDoctors({
 
             return (
               <AnimateOnScroll key={doctor.id} delayMs={idx * 150}>
-                <SpotlightCard
-                  spotlightColor={isMatch ? "rgba(28, 56, 43, 0.14)" : "rgba(28, 56, 43, 0.07)"}
-                  onClick={() => onSelectDoctor(doctor)}
-                  className={`group bg-white rounded-2xl border card-hover-lift overflow-hidden cursor-pointer flex flex-col justify-between h-full ${
-                    isMatch
-                      ? "border-[#1C382B] ring-2 ring-[#1C382B]/30 shadow-xl scale-[1.01]"
-                      : "border-[#E7E2D8] hover:border-[#1C382B]/50"
-                  }`}
-                >
+                <div id={`doctor-${doctor.id}`} className="scroll-mt-28 h-full">
+                  <SpotlightCard
+                    spotlightColor={isMatch ? "rgba(28, 56, 43, 0.14)" : "rgba(28, 56, 43, 0.07)"}
+                    onClick={() => onSelectDoctor(doctor)}
+                    className={`group bg-white rounded-2xl border card-hover-lift overflow-hidden cursor-pointer flex flex-col justify-between h-full ${
+                      isMatch
+                        ? "border-[#1C382B] ring-2 ring-[#1C382B]/30 shadow-xl scale-[1.01]"
+                        : "border-[#E7E2D8] hover:border-[#1C382B]/50"
+                    }`}
+                  >
                   {/* Portrait or Dignified Clinician Monogram */}
                   <div className="relative aspect-[4/4] overflow-hidden bg-gradient-to-br from-[#FAF8F5] via-[#EFECE6] to-[#E3DDD2] flex items-center justify-center">
                     {doctor.image ? (
@@ -162,7 +163,8 @@ export function OurDoctors({
                     </div>
                   </div>
                 </SpotlightCard>
-              </AnimateOnScroll>
+              </div>
+            </AnimateOnScroll>
             );
           })}
         </div>

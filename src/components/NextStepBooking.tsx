@@ -18,7 +18,7 @@ export function NextStepBooking({ onOpenBookingModal }: NextStepBookingProps) {
   };
 
   return (
-    <section className="py-16 sm:py-24 border-b border-[#ECE7DE]">
+    <section id="book" className="scroll-mt-20 py-16 sm:py-24 border-b border-[#ECE7DE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           

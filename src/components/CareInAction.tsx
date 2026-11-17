@@ -4,7 +4,7 @@ import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 
 export function CareInAction() {
   return (
-    <section className="py-16 sm:py-24 border-b border-[#ECE7DE]">
+    <section id="care-in-action" className="scroll-mt-20 py-16 sm:py-24 border-b border-[#ECE7DE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}

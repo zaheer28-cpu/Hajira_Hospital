@@ -26,7 +26,7 @@ export function EveryStep({ onOpenChecklistModal }: EveryStepProps) {
   ];
 
   return (
-    <section className="bg-[#152A21] text-white py-16 sm:py-24 overflow-hidden border-b border-[#0E1C16]">
+    <section id="every-step" className="scroll-mt-20 bg-[#152A21] text-white py-16 sm:py-24 overflow-hidden border-b border-[#0E1C16]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           

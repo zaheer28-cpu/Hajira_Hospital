@@ -1,11 +1,28 @@
+"use client";
+
 import React from "react";
-import { ArrowUpRight, MessageSquareHeart } from "lucide-react";
+import { ArrowUpRight, MessageSquareHeart, Compass, ChevronDown } from "lucide-react";
+import { DEPARTMENTS } from "@/data/hospitalData";
 
 interface HeroProps {
   onOpenBookingModal: (departmentId?: string) => void;
+  onSelectDepartment?: (deptId: string) => void;
 }
 
-export function Hero({ onOpenBookingModal }: HeroProps) {
+export function Hero({ onOpenBookingModal, onSelectDepartment }: HeroProps) {
+  const handleJump = (targetValue: string) => {
+    if (!targetValue) return;
+    if (targetValue.startsWith("dept-")) {
+      const deptId = targetValue.replace("dept-", "");
+      onSelectDepartment?.(deptId);
+      const el = document.getElementById(targetValue) || document.getElementById("care");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      const el = document.getElementById(targetValue);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="relative overflow-hidden pt-8 pb-16 lg:py-20 border-b border-[#ECE7DE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -30,26 +47,106 @@ export function Hero({ onOpenBookingModal }: HeroProps) {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg text-[#53625B] leading-relaxed max-w-xl mb-8 font-normal animate-in fade-in slide-in-from-bottom-4 duration-800">
+            <p className="text-base sm:text-lg text-[#53625B] leading-relaxed max-w-xl mb-6 font-normal animate-in fade-in slide-in-from-bottom-4 duration-800">
               From everyday questions to life’s bigger moments, find thoughtful care
               and people who take the time to listen.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 mb-12 animate-in fade-in slide-in-from-bottom-5 duration-900">
+            <div className="flex flex-wrap items-center gap-3.5 mb-6 animate-in fade-in slide-in-from-bottom-5 duration-900">
               <a
                 href="#care"
-                className="inline-flex items-center justify-center bg-[#1C382B] hover:bg-[#12281E] text-white text-sm font-medium px-6 py-3.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center justify-center bg-[#1C382B] hover:bg-[#12281E] text-white text-sm font-medium px-6 py-3.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 Find your care
               </a>
               <a
                 href="#doctors"
-                className="inline-flex items-center gap-1.5 border border-[#D8D2C6] hover:border-[#1C382B] bg-white/70 hover:bg-white text-[#18231E] text-sm font-medium px-5 py-3.5 rounded-full transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5 group"
+                className="inline-flex items-center gap-1.5 border border-[#D8D2C6] hover:border-[#1C382B] bg-white/70 hover:bg-white text-[#18231E] text-sm font-medium px-5 py-3.5 rounded-full transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5 group cursor-pointer"
               >
                 <span>Meet our doctors</span>
                 <ArrowUpRight className="w-4 h-4 text-[#68786F] group-hover:text-[#1C382B] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
               </a>
+            </div>
+
+            {/* Direct Jump Dropdown Bar to bypass long scrolling */}
+            <div className="w-full max-w-lg mb-8 p-3.5 rounded-2xl bg-white border border-[#E0D8CB] shadow-xs animate-in fade-in slide-in-from-bottom-5 duration-950">
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#1C382B] uppercase tracking-wider">
+                  <Compass className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Jump Directly to Specialty or Section</span>
+                </div>
+                <span className="text-[10px] text-[#788880]">Skip scrolling ⬇</span>
+              </div>
+
+              <div className="relative">
+                <select
+                  defaultValue=""
+                  onChange={(e) => handleJump(e.target.value)}
+                  className="w-full appearance-none bg-[#FAF8F5] border border-[#D5CEC2] rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-[#18231E] focus:outline-hidden focus:ring-2 focus:ring-[#1C382B] cursor-pointer"
+                >
+                  <option value="">Select a department or section to jump...</option>
+                  <optgroup label="🩺 Specialized Departments (8)">
+                    {DEPARTMENTS.map((dept) => (
+                      <option key={dept.id} value={`dept-${dept.id}`}>
+                        {dept.title}
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="📌 Hospital Sections">
+                    <option value="doctors">Senior Medical Faculty & Doctors</option>
+                    <option value="guide">Patient Checklist & What to Bring</option>
+                    <option value="about">About Hajira Hospital & Principles</option>
+                    <option value="care-in-action">Care in Action Moments</option>
+                    <option value="every-step">Here at Every Step Guide</option>
+                    <option value="book">Appointment Desk & WhatsApp</option>
+                    <option value="contact">Location, Hours & Contacts</option>
+                  </optgroup>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-[#6B7B73]">
+                  <ChevronDown className="w-4 h-4" />
+                </div>
+              </div>
+
+              {/* Quick shortcut pills for top queried areas */}
+              <div className="flex flex-wrap items-center gap-1.5 mt-2.5 pt-2 border-t border-[#ECE7DE]">
+                <span className="text-[10px] text-[#718279] mr-0.5">Quick jump:</span>
+                <button
+                  type="button"
+                  onClick={() => handleJump("dept-gynaecology")}
+                  className="text-[11px] bg-[#FAF8F5] hover:bg-[#1C382B] hover:text-white border border-[#DDD6C9] px-2.5 py-0.5 rounded-full transition-colors font-medium text-[#2C3B32] cursor-pointer"
+                >
+                  Gynaecology
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleJump("dept-ent-surgery")}
+                  className="text-[11px] bg-[#FAF8F5] hover:bg-[#1C382B] hover:text-white border border-[#DDD6C9] px-2.5 py-0.5 rounded-full transition-colors font-medium text-[#2C3B32] cursor-pointer"
+                >
+                  ENT
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleJump("dept-cardiology")}
+                  className="text-[11px] bg-[#FAF8F5] hover:bg-[#1C382B] hover:text-white border border-[#DDD6C9] px-2.5 py-0.5 rounded-full transition-colors font-medium text-[#2C3B32] cursor-pointer"
+                >
+                  Cardiology
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleJump("dept-general-surgery")}
+                  className="text-[11px] bg-[#FAF8F5] hover:bg-[#1C382B] hover:text-white border border-[#DDD6C9] px-2.5 py-0.5 rounded-full transition-colors font-medium text-[#2C3B32] cursor-pointer"
+                >
+                  Laparoscopy
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleJump("doctors")}
+                  className="text-[11px] bg-[#EAEFEA] hover:bg-[#1C382B] hover:text-white border border-[#C5D5C8] text-[#1C382B] px-2.5 py-0.5 rounded-full transition-colors font-semibold cursor-pointer"
+                >
+                  All Doctors ↗
+                </button>
+              </div>
             </div>
 
             {/* Sub-card quote badge */}
@@ -93,15 +190,12 @@ export function Hero({ onOpenBookingModal }: HeroProps) {
                   </div>
                   <button
                     onClick={() => onOpenBookingModal()}
-                    className="shrink-0 bg-[#1C382B] text-white text-[11px] font-medium px-3.5 py-1.5 rounded-full hover:bg-[#12281E] transition-all hover:scale-105 active:scale-95 shadow-xs"
+                    className="shrink-0 bg-[#1C382B] text-white text-[11px] font-medium px-3.5 py-1.5 rounded-full hover:bg-[#12281E] transition-all hover:scale-105 active:scale-95 shadow-xs cursor-pointer"
                   >
                     Book now
                   </button>
                 </div>
               </div>
-
-              {/* Decorative subtle aura with soft pulse */}
-              <div className="absolute -top-6 -right-6 w-36 h-36 rounded-full bg-[#E5ECE7] filter blur-2xl -z-10 opacity-70 animate-pulse-glow pointer-events-none"></div>
             </div>
           </div>
 

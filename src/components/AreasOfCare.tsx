@@ -81,15 +81,16 @@ export function AreasOfCare({
             const isSelected = selectedDepartmentId === dept.id;
             return (
               <AnimateOnScroll key={dept.id} delayMs={idx * 100}>
-                <SpotlightCard
-                  spotlightColor={isSelected ? "rgba(28, 56, 43, 0.12)" : "rgba(28, 56, 43, 0.06)"}
-                  onClick={() => onSelectDepartment(dept.id)}
-                  className={`group text-left p-6 sm:p-7 rounded-2xl border card-hover-lift cursor-pointer flex flex-col justify-between h-full ${
-                    isSelected
-                      ? "bg-[#F3F6F3] border-[#1C382B] shadow-md ring-2 ring-[#1C382B]/40 scale-[1.01]"
-                      : "bg-white border-[#E7E2D8] hover:border-[#1C382B]/50"
-                  }`}
-                >
+                <div id={`dept-${dept.id}`} className="scroll-mt-28 h-full">
+                  <SpotlightCard
+                    spotlightColor={isSelected ? "rgba(28, 56, 43, 0.12)" : "rgba(28, 56, 43, 0.06)"}
+                    onClick={() => onSelectDepartment(dept.id)}
+                    className={`group text-left p-6 sm:p-7 rounded-2xl border card-hover-lift cursor-pointer flex flex-col justify-between h-full ${
+                      isSelected
+                        ? "bg-[#F3F6F3] border-[#1C382B] shadow-md ring-2 ring-[#1C382B]/40 scale-[1.01]"
+                        : "bg-white border-[#E7E2D8] hover:border-[#1C382B]/50"
+                    }`}
+                  >
                   <div>
                     {/* Icon & Arrow */}
                     <div className="flex items-center justify-between mb-5">
@@ -137,7 +138,8 @@ export function AreasOfCare({
                     </button>
                   </div>
                 </SpotlightCard>
-              </AnimateOnScroll>
+              </div>
+            </AnimateOnScroll>
             );
           })}
         </div>

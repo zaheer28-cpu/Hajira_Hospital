@@ -16,6 +16,7 @@ import { Footer } from "@/components/Footer";
 import { BookingModal } from "@/components/BookingModal";
 import { DoctorBioModal } from "@/components/DoctorBioModal";
 import { ResourceChecklistModal } from "@/components/ResourceChecklistModal";
+import { HajiraCareAgent } from "@/components/HajiraCareAgent";
 import { Doctor } from "@/data/hospitalData";
 
 export default function HomePage() {
@@ -66,13 +67,19 @@ export default function HomePage() {
       {/* 1. Top Announcement Header */}
       <TopBar />
 
-      {/* 2. Main Navigation Bar */}
-      <Navbar onOpenBookingModal={handleOpenBookingModal} />
+      {/* 2. Main Navigation Bar with Quick Jump Dropdown */}
+      <Navbar
+        onOpenBookingModal={handleOpenBookingModal}
+        onSelectDepartment={handleSelectDepartment}
+      />
 
       {/* Main Content Sections */}
       <main className="flex-1">
-        {/* 3. Hero Section */}
-        <Hero onOpenBookingModal={handleOpenBookingModal} />
+        {/* 3. Hero Section with Quick Specialty Jump Bar */}
+        <Hero
+          onOpenBookingModal={handleOpenBookingModal}
+          onSelectDepartment={handleSelectDepartment}
+        />
 
         {/* 4. Moments That Matter */}
         <MomentsThatMatter onOpenChecklistModal={handleOpenChecklistModal} />
@@ -128,6 +135,12 @@ export default function HomePage() {
       <ResourceChecklistModal
         resourceId={selectedResourceId}
         onClose={() => setSelectedResourceId(null)}
+      />
+
+      {/* 13. Virtual AI Care Assistant / Floating Hospital Agent */}
+      <HajiraCareAgent
+        onOpenBookingModal={handleOpenBookingModal}
+        onSelectDepartment={handleSelectDepartment}
       />
     </div>
   );
